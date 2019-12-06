@@ -78,6 +78,16 @@ Place.create(name: '862 Unidad Camilo Torres', latitude: 4.640760, longitude: -7
 Place.create(name: '901 Portería Calle 53', latitude: 4.643538, longitude: -74.083358)
 Place.create(name: '933 CASE CAN Area de salúd', latitude: 4.647497, longitude: -74.096464)
 Place.create(name: '934 Complejo Clínica de Santa Rosa', latitude: 4.648817, longitude: -74.095439)
+
+# id 1
+User.create(email: "dcnavarreter@unal.edu.co", password: "abc123", name: "Diana Navarrete", nickname: "dcnava")
+# id 2
+User.create(email: "dafrodriguezro@unal.edu.co", password: "abc123", name: "David Rodriguez", nickname: "dfrod")
+
+Event.create(title: "Evento 1", date: Time.zone.now, user_id: 1, place_id: 1, place_detail: "Detalle del sitio 1", details: "Detalles", poster: "", created_at: Time.zone.now, updated_at: nil)
+Event.create(title: "Evento 2", date: Time.zone.now, user_id: 2, place_id: 3, place_detail: "Detalle del sitio 3", details: "Detalles", poster: "", created_at: Time.zone.now, updated_at: nil)
+
+
 =begin
 Place.create(name: 'Cancha de Fútbol #1', latitude: 4.63, longitude: -74.08)
 Place.create(name: 'Cancha de Fútbol #2', latitude: 4.63, longitude: -74.08)
