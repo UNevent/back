@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_181240) do
+ActiveRecord::Schema.define(version: 2019_12_05_230750) do
 
   create_table "event_tags", force: :cascade do |t|
     t.integer "event_id", null: false
@@ -25,13 +25,13 @@ ActiveRecord::Schema.define(version: 2019_12_05_181240) do
     t.string "title"
     t.datetime "date"
     t.integer "user_id", null: false
-    t.float "place_lat"
-    t.float "place_lng"
+    t.integer "place_id", null: false
     t.string "place_detail"
     t.text "details"
     t.string "poster"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["place_id"], name: "index_events_on_place_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(version: 2019_12_05_181240) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tag_id"], name: "index_interests_on_tag_id"
     t.index ["user_id"], name: "index_interests_on_user_id"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
@@ -78,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_181240) do
 
   add_foreign_key "event_tags", "events"
   add_foreign_key "event_tags", "tags"
+  add_foreign_key "events", "places"
   add_foreign_key "events", "users"
   add_foreign_key "interests", "tags"
   add_foreign_key "interests", "users"
