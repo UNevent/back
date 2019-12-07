@@ -15,12 +15,26 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
+    tags=params[:tags]
     @event = Event.new(event_params)
 
     if @event.save
+      if tags
+        EventTag.saveET(@event.id, tags)
+      end
       render json: @event, status: :created, location: @event
     else
       render json: @event.errors, status: :unprocessable_entity
+    end
+  end
+
+  # GET /createdby?user_id=1 
+  def createdby
+    @events= Event.created_by(params[:user_id])
+    if @events.nil?
+      render json: "Error en la búsqueda", status: :no_content
+    else
+      render json: @events, status: :ok
     end
   end
 
@@ -46,6 +60,6 @@ class EventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_params
-      params.require(:event).permit(:title, :date, :user_id, :place_id, :place_detail, :details, :poster)
+      params.require(:event).permit(:title, :date, :user_id, :place_id, :place_detail, :details, :poster, :tags)
     end
 end

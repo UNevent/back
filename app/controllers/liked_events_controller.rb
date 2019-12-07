@@ -33,6 +33,16 @@ class LikedEventsController < ApplicationController
     end
   end
 
+  # GET /by?user_id=1 
+  def by
+    @events= LikedEvent.liked_by(params[:user_id])
+    if @events.nil?
+      render json: "Error en la búsqueda", status: :no_content
+    else
+      render json: @events, status: :ok
+    end
+  end
+
   # DELETE /liked_events/1
   def destroy
     @liked_event.destroy
