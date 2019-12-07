@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_follows
   resources :liked_events
   resources :places
   resources :event_tags
