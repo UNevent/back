@@ -33,6 +33,18 @@ class TagsController < ApplicationController
     end
   end
 
+  # GET /interested_in?user_id=1 
+  def interested_in
+    user=params[:user_id]
+    puts("user " + user)
+    @tags= Tag.interested_in(user)
+    if @tags.nil?
+      render json: "Error en la búsqueda", status: :unprocessable_entity
+    else
+      render json: @tags, status: :ok
+    end
+  end
+
   # DELETE /tags/1
   def destroy
     @tag.destroy
@@ -46,6 +58,6 @@ class TagsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def tag_params
-      params.require(:tag).permit(:name, :category)
+      params.require(:tag).permit(:name, :category, :user_id)
     end
 end

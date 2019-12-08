@@ -84,9 +84,30 @@ User.create(email: "dcnavarreter@unal.edu.co", password: "abc123", name: "Diana 
 # id 2
 User.create(email: "dafrodriguezro@unal.edu.co", password: "abc123", name: "David Rodriguez", nickname: "dfrod")
 
-Event.create(title: "Evento 1", date: Time.zone.now, user_id: 1, place_id: 1, place_detail: "Detalle del sitio 1", details: "Detalles", poster: "", created_at: Time.zone.now, updated_at: nil)
-Event.create(title: "Evento 2", date: Time.zone.now, user_id: 2, place_id: 3, place_detail: "Detalle del sitio 3", details: "Detalles", poster: "", created_at: Time.zone.now, updated_at: nil)
+Event.create(title: "Evento 1", 
+            date: Time.zone.now, 
+            user_id: 1, 
+            place_id: 1, 
+            place_detail: "Detalle del sitio 1",
+            details: "Detalles", 
+            poster: "https://www.las2orillas.co/wp-content/uploads/2017/04/UNal-1-780x514.jpg", 
+            created_at: Time.zone.now, 
+            updated_at: nil)
 
+Event.create(title: "Evento 2", 
+            date: Time.zone.now, 
+            user_id: 2, 
+            place_id: 3, 
+            place_detail: "Detalle del sitio 3", 
+            details: "Detalles", 
+            poster: "https://www.las2orillas.co/wp-content/uploads/2017/04/UNal-1-780x514.jpg", 
+            created_at: Time.zone.now, 
+            updated_at: nil)
+EventTag.create(event_id:1, tag_id:3)
+EventTag.create(event_id:2, tag_id:5)
+LikedEvent.create(event_id:1, user_id:2)
+Interest.create(user_id:1, tag_id:2)
+Interest.create(user_id:1, tag_id:5)
 UserFollow.create(follower_id:1, user_followed_id:2)
 =begin
 Place.create(name: 'Cancha de Fútbol #1', latitude: 4.63, longitude: -74.08)

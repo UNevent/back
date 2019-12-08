@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :user_followeds, :class_name => 'User_follow', :foreign_key => 'user_followed_id'
   has_many :liked_event, dependent: :destroy
   has_many :events, through: :liked_event
+  has_many :interests, dependent: :destroy
+  has_many :tags, through: :interests
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
