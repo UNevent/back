@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserFollowTest < ActiveSupport::TestCase
+class WelcomeControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

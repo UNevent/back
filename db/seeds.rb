@@ -108,7 +108,7 @@ EventTag.create(event_id:2, tag_id:5)
 LikedEvent.create(event_id:1, user_id:2)
 Interest.create(user_id:1, tag_id:2)
 Interest.create(user_id:1, tag_id:5)
-UserFollow.create(follower_id:1, user_followed_id:2)
+#UserFollow.create(follower_id:1, user_followed_id:2)
 =begin
 Place.create(name: 'Cancha de Fútbol #1', latitude: 4.63, longitude: -74.08)
 Place.create(name: 'Cancha de Fútbol #2', latitude: 4.63, longitude: -74.08)

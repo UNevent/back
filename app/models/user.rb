@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   #before_save -> { skip_confirmation! }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_many :followers, :class_name => 'User_follow', :foreign_key => 'follower_id'
-  has_many :user_followeds, :class_name => 'User_follow', :foreign_key => 'user_followed_id'
+#  has_many :followers, :class_name => 'User_follow', :foreign_key => 'follower_id'
+#  has_many :user_followeds, :class_name => 'User_follow', :foreign_key => 'user_followed_id'
   has_many :liked_event, dependent: :destroy
   has_many :events, through: :liked_event
   has_many :interests, dependent: :destroy
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
-  def associations
-    (follower_associations+ user_followed_associations).flatten.uniq
-  end
+  #def associations
+  #  (follower_associations+ user_followed_associations).flatten.uniq
+  #end
 end
