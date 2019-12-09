@@ -1,7 +1,47 @@
-<h2>Hello World</h2>
-<p>
-  The time is now: <%= Time.now %>
-</p>
-<p>
-    Funciona!
-</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+      h2{
+        text-align:center;
+        border-bottom-color: darkred;
+        border-bottom-style: groove;
+        font-size: 200%;
+        padding: 2%;
+        margin: 0;
+      }
+      body{
+        margin: 0;
+        height: 100vh;
+        font-family: "Courier", Courier,sans-serif;
+      }
+      #content{
+        height: 75vh;
+        background-image: url("https://especiales.semana.com/universidad-nacional/images/historia-mb.png");
+        padding: 5%;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+      }
+      p{
+        margin: 0;
+        color: #fff;
+        padding: 5%;
+        background-color: rgba(0,0,5,0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <!--%= image_tag ("logo.png")%-->
+      <!--img src="https://drive.google.com/file/d/1A5CGBfdQFQJhuaza2Cuhfm21O76LwClx/view"--> 
+    </div>
+    <h2>UNEvent</h2>
+    <div id='content'>
+    <p>
+        Funciona!
+    </p>
+    </div>
+  </body>
+</html>
