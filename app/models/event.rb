@@ -91,5 +91,28 @@ class Event < ApplicationRecord
     end
     data
   end
+
+  def self.filter_all(tags, user, date_start, date_end)   
+    if date_end ==nil
+      date_end=self.maximum("date")
+      puts(date_end.to_s)
+    end
+    if date_start ==nil
+      date_start=self.minimum("date")
+      puts(date_start.to_s)
+    end
+    puts(date_end==nil)
+    events=self.joins(:event_tags,:place,:user)
+              .select('users.id, users.nickname as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
+              .where(event_tags:  {tag_id: tags}, date: date_start..date_end )
+    data=Array.new
+    events.each do |e|
+      ev={}
+      ev["event"]=e
+      ev["likes"]= LikedEvent.count_likes(e.id, user)
+      data.push(ev)
+    end
+    data
+  end
   
 end

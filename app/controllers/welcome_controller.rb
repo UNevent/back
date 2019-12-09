@@ -1,6 +1,5 @@
-class WelcomeController < ApplicationController
-
-    def index
-        render json: "Funciona 'index'", status: :ok
-    end
+class WelcomeController < ActionController::Base 
+  layout false
+  def index
+  end
 end

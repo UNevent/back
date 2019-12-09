@@ -76,6 +76,17 @@ class EventsController < ApplicationController
     end
   end
 
+  # PUT /filter_all
+  def filter_all
+    tags=params[:tags]
+    @events= Event.filter_all(tags.split(','), params[:user_id], params[:date_start],params[:date_end])
+    if @events.nil?
+      render json: "Error en la búsqueda", status: :unprocessable_entity
+    else
+      render json: @events, status: :ok
+    end
+  end
+
   # PATCH/PUT /events/1
   def update
     if @event.update(event_params)
@@ -98,6 +109,6 @@ class EventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_params
-      params.require(:event).permit(:title, :date, :user_id, :place_id, :place_detail, :details, :poster, :owner_id, :tags)
+      params.require(:event).permit(:title, :date, :user_id, :place_id, :place_detail, :details, :poster, :owner_id, :tags, :date_start, :date_end)
     end
 end

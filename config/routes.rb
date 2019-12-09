@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'welcome/index' 
   root 'welcome#index'
   resources :liked_events 
 
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
       get 'liked_by', to: "events#liked_by"
       get 'in_place', to: "events#in_place"
       get 'with_tags', to: "events#with_tags"
+      put 'filter_all', to: "events#filter_all"
     end
   end
 
