@@ -68,13 +68,6 @@ ActiveRecord::Schema.define(version: 2019_12_07_164044) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_follows", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "user_followed_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
