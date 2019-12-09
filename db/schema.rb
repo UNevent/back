@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 2019_12_07_164044) do
     t.index ["place_id"], name: "index_events_on_place_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
+  
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "interests", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -51,14 +59,6 @@ ActiveRecord::Schema.define(version: 2019_12_07_164044) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_liked_events_on_event_id"
     t.index ["user_id"], name: "index_liked_events_on_user_id"
-  end
-
-  create_table "places", force: :cascade do |t|
-    t.string "name"
-    t.float "latitude"
-    t.float "longitude"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|

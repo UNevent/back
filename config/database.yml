@@ -11,6 +11,8 @@ default: &default
 
 development:
   <<: *default
+  user: postgres
+  password: dbUN0
   database: db_development #db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -22,4 +24,6 @@ test:
 
 production:
   <<: *default
-  database: db_production #db/production.sqlite3
+  database: <%= ENV['DATABASE_URL'] %> #db_production #db/production.sqlite3
+  username: unevent
+  password: <%= ENV['UNEVENT_DATABASE_PASSWORD'] %>
