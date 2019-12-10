@@ -22,14 +22,16 @@ class Event < ApplicationRecord
     event
   end
 
+
   def self.liked_by(user)
     events=Event.joins(:liked_events,:place,:user)
-                .select('users.id, users.nickname as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
+                .select('users.id, users.email as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
                 .where(liked_events: {user_id: user})
     data=Array.new
     events.each do |e|
       ev={}
       ev["event"]=e
+      ev["event"]["user_nick"]=e.user_nick.split('@').first
       ev["likes"]= LikedEvent.count_likes(e.id,user)
       data.push(ev)
     end
@@ -38,12 +40,13 @@ class Event < ApplicationRecord
 
   def self.in_place(place, user=0)
     events=self.joins(:place, :user )
-              .select('users.id, users.nickname as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
+              .select('users.id, users.email as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
               .where(places: {id: place})
     data=Array.new
     events.each do |e|
       ev={}
       ev["event"]=e
+      ev["event"]["user_nick"]=e.user_nick.split('@').first
       ev["likes"]= LikedEvent.count_likes(e.id,user)
       data.push(ev)
     end
@@ -52,12 +55,13 @@ class Event < ApplicationRecord
 
   def self.with_tags(tags,user=0)
     events=self.joins(:event_tags,:place,:user)
-              .select('users.id, users.nickname as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
+              .select('users.id, users.email as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
               .where(event_tags:  {tag_id: tags})
     data=Array.new
     events.each do |e|
       ev={}
       ev["event"]=e
+      ev["event"]["user_nick"]=e.user_nick.split('@').first
       ev["likes"]= LikedEvent.count_likes(e.id, user)
       data.push(ev)
     end
@@ -66,12 +70,13 @@ class Event < ApplicationRecord
 
   def self.created_by(owner, user=0)
     events=Event.joins(:place,:user)
-    .select('users.id, users.nickname as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
+    .select('users.id, users.email as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
     .where(user_id: owner)   
     data=Array.new
     events.each do |e|
       ev={}
       ev["event"]=e
+      ev["event"]["user_nick"]=e.user_nick.split('@').first
       ev["likes"]= LikedEvent.count_likes(e.id,user)
       data.push(ev)
     end
@@ -81,11 +86,12 @@ class Event < ApplicationRecord
 
   def self.full(user=0)
     events=self.joins(:place,:user)
-        .select('users.id, users.nickname as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
+        .select('users.id, users.email as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
     data=Array.new
     events.each do |e|
       ev={}
       ev["event"]=e
+      ev["event"]["user_nick"]=e.user_nick.split('@').first
       ev["likes"]= LikedEvent.count_likes(e.id,user)
       data.push(ev)
     end
@@ -103,12 +109,13 @@ class Event < ApplicationRecord
     end
     puts(date_end==nil)
     events=self.joins(:event_tags,:place,:user)
-              .select('users.id, users.nickname as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
+              .select('users.id, users.email as user_nick, places.id, places.name as place_name, places.latitude, places.longitude, events.*')
               .where(event_tags:  {tag_id: tags}, date: date_start..date_end )
     data=Array.new
     events.each do |e|
       ev={}
       ev["event"]=e
+      ev["event"]["user_nick"]=e.user_nick.split('@').first
       ev["likes"]= LikedEvent.count_likes(e.id, user)
       data.push(ev)
     end
