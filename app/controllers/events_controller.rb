@@ -17,7 +17,10 @@ class EventsController < ApplicationController
   def create
     tags=params[:tags]
     @event = Event.new(event_params)
-
+    img=params[:poster]
+    if img == nil || img ==""
+      @event.poster="https://www.las2orillas.co/wp-content/uploads/2017/04/UNal-1-780x514.jpg"
+    end
     if @event.save
       if tags
         EventTag.saveET(@event.id, tags)
